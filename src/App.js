@@ -17,7 +17,7 @@ function App() {
   let [재고,재고변경] = useState([10,11,12]);
   // let [host,host변경] = usetState([{host:"1"}]);
   let [host,host변경] = useState([{host:""}]);
-
+  let [db,db변경] = useState("");
   
 
   return (
@@ -101,7 +101,20 @@ function App() {
                         }) 
                         }}>테스트</button>      
 
-            </div>
+           
+
+            <button className="btn btn-primary"  onClick={()=>{
+                    axios.get('/api/test')
+                    .then((result)=>{ // 성공
+                        console.log(result.data);
+                        db변경([...db, ...result.data]);
+                        }) 
+                        .catch(()=>{ // 실패
+                        console.log('실패염');
+                        }) 
+                        }}>db테스트</button>      
+
+</div>
 
         </Route>
 
