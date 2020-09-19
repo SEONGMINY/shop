@@ -15,6 +15,10 @@ function App() {
 
   let [옷,옷변경] = useState(data);
   let [재고,재고변경] = useState([10,11,12]);
+  // let [host,host변경] = usetState([{host:"1"}]);
+  let [host,host변경] = useState([{host:""}]);
+
+  
 
   return (
     <div className="App">
@@ -40,6 +44,7 @@ function App() {
 
       <Switch>
 
+   
         {/* 메인 페이지 */}
         <Route exact path="/">
 
@@ -84,7 +89,19 @@ function App() {
                 console.log('실패염');
               }) 
             }}>더보기</button>
-          </div>
+
+       <button className="btn btn-primary"  onClick={()=>{
+                    axios.get('/api/host')
+                    .then((result)=>{ // 성공
+                        console.log(result.data);
+                        host변경([...host, ...result.data]);
+                        }) 
+                        .catch(()=>{ // 실패
+                        console.log('실패염');
+                        }) 
+                        }}>테스트</button>      
+
+            </div>
 
         </Route>
 
